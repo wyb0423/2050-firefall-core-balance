@@ -1,0 +1,11 @@
+﻿l_english:
+ ffpa_postwar_population_recovery: "Postwar Population Recovery"
+ ffpa_postwar_population_recovery_desc: "Society is recovering after the nuclear war. The birth-rate, conversion, and assimilation bonuses decay gradually over fifty years."
+ ffpa_double_innovation_cap: "Doubled Innovation Cap"
+ ffpa_double_innovation_cap_desc: "Maximum Innovation Investment is doubled relative to its value without this modifier."
+ ffpa_double_technology_spread: "Doubled Technology Spread"
+ ffpa_double_technology_spread_desc: "Technology Spread speed is increased by 100%."
+ ffpa_union_war_annex_country_tenth: "Union War Annexation (10% Infamy)"
+ FFPA_UNION_WAR_INFAMY_SCALE: "Union War Infamy: 10%"
+ setting_uw_infamy_tenth: "#tooltippable #tooltip:[GetPlayer.GetTooltipTag],setting_uw_infamy_tenth_desc #high Tenth Infamy#!#!#!"
+ setting_uw_infamy_tenth_desc: "Starting Union War annexation war goals cost #v 10%#! of normal annexation Infamy."

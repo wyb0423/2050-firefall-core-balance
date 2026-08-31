@@ -1,0 +1,21 @@
+# Preserve Firefall's original Union War Infamy choices and add an optional
+# 10% choice. This is a full replacement because game-rule option order is UI
+# order and there is no same-directory precedent for ordered partial injection.
+REPLACE:uw_infamy_cost = {
+	default = uw_infamy_full
+
+	uw_infamy_none = {
+	}
+
+	uw_infamy_tenth = {
+	}
+
+	uw_infamy_quarter = {
+	}
+
+	uw_infamy_half = {
+	}
+
+	uw_infamy_full = {
+	}
+}

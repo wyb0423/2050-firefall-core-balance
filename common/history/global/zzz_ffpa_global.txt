@@ -1,0 +1,11 @@
+# Applied once while a new 2050 game is initialized. Using history rather than
+# an after-lobby on-action prevents the 50-year duration resetting on save load.
+GLOBAL = {
+	every_country = {
+		add_modifier = {
+			name = ffpa_postwar_population_recovery
+			years = 50
+			is_decaying = yes
+		}
+	}
+}

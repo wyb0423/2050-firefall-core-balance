@@ -1,0 +1,199 @@
+# Replace Firefall's Union War dispatcher only to route the additional 10%
+# game-rule choice to its dedicated diplomatic play. All original branches and
+# escalation values are preserved from Firefall 0.1.1.
+REPLACE:uw_start_union_war = {
+	# Instant war
+	if = {
+		limit = { has_game_rule = uw_war_instant }
+		if = {
+			limit = { has_game_rule = uw_infamy_tenth }
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war_tenth
+				target_country = scope:target_country
+				escalation = 100
+				save_scope_as = uw_union_war_play
+			}
+		}
+		else_if = {
+			limit = { has_game_rule = uw_infamy_quarter }
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war_quarter
+				target_country = scope:target_country
+				escalation = 100
+				save_scope_as = uw_union_war_play
+			}
+		}
+		else_if = {
+			limit = { has_game_rule = uw_infamy_half }
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war_half
+				target_country = scope:target_country
+				escalation = 100
+				save_scope_as = uw_union_war_play
+			}
+		}
+		else_if = {
+			limit = { has_game_rule = uw_infamy_full }
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war_full
+				target_country = scope:target_country
+				escalation = 100
+				save_scope_as = uw_union_war_play
+			}
+		}
+		else = {
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war
+				target_country = scope:target_country
+				escalation = 100
+				save_scope_as = uw_union_war_play
+			}
+		}
+		scope:uw_union_war_play ?= {
+			set_war = yes
+		}
+	}
+	# War countdown (~80 escalation)
+	else_if = {
+		limit = { has_game_rule = uw_war_countdown }
+		if = {
+			limit = { has_game_rule = uw_infamy_tenth }
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war_tenth
+				target_country = scope:target_country
+				escalation = 80
+			}
+		}
+		else_if = {
+			limit = { has_game_rule = uw_infamy_quarter }
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war_quarter
+				target_country = scope:target_country
+				escalation = 80
+			}
+		}
+		else_if = {
+			limit = { has_game_rule = uw_infamy_half }
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war_half
+				target_country = scope:target_country
+				escalation = 80
+			}
+		}
+		else_if = {
+			limit = { has_game_rule = uw_infamy_full }
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war_full
+				target_country = scope:target_country
+				escalation = 80
+			}
+		}
+		else = {
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war
+				target_country = scope:target_country
+				escalation = 80
+			}
+		}
+	}
+	# Escalation / mobilization phase (~50)
+	else_if = {
+		limit = { has_game_rule = uw_war_escalation }
+		if = {
+			limit = { has_game_rule = uw_infamy_tenth }
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war_tenth
+				target_country = scope:target_country
+				escalation = 50
+			}
+		}
+		else_if = {
+			limit = { has_game_rule = uw_infamy_quarter }
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war_quarter
+				target_country = scope:target_country
+				escalation = 50
+			}
+		}
+		else_if = {
+			limit = { has_game_rule = uw_infamy_half }
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war_half
+				target_country = scope:target_country
+				escalation = 50
+			}
+		}
+		else_if = {
+			limit = { has_game_rule = uw_infamy_full }
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war_full
+				target_country = scope:target_country
+				escalation = 50
+			}
+		}
+		else = {
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war
+				target_country = scope:target_country
+				escalation = 50
+			}
+		}
+	}
+	# Normal play from the start
+	else = {
+		if = {
+			limit = { has_game_rule = uw_infamy_tenth }
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war_tenth
+				target_country = scope:target_country
+			}
+		}
+		else_if = {
+			limit = { has_game_rule = uw_infamy_quarter }
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war_quarter
+				target_country = scope:target_country
+			}
+		}
+		else_if = {
+			limit = { has_game_rule = uw_infamy_half }
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war_half
+				target_country = scope:target_country
+			}
+		}
+		else_if = {
+			limit = { has_game_rule = uw_infamy_full }
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war_full
+				target_country = scope:target_country
+			}
+		}
+		else = {
+			create_diplomatic_play = {
+				name = union_war
+				type = dp_union_war
+				target_country = scope:target_country
+			}
+		}
+	}
+}

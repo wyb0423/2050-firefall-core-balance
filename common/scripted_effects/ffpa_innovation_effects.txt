@@ -1,0 +1,72 @@
+# Mirror the complete unmodified Innovation cap with an additive modifier.
+#
+# country_weekly_innovation_max_add has no multiplicative counterpart.  The
+# country modifier accessor exposes ordinary additive sources, while the
+# code-driven base (50) and literacy contribution (150 * literacy) must be
+# supplied explicitly.
+#
+# Important: read the modifier graph before removing the old mirror. Removing
+# a modifier invalidates the graph for the rest of the current effect and made
+# the previous implementation evaluate the accessor as `none`.
+ffpa_refresh_innovation_cap = {
+	# Apply the +100% technology-spread modifier to existing and newly created
+	# countries. Do not remove/re-add it during the monthly cap refresh.
+	if = {
+		limit = {
+			NOT = {
+				has_modifier = ffpa_double_technology_spread
+			}
+		}
+		add_modifier = {
+			name = ffpa_double_technology_spread
+		}
+	}
+
+	# One-time migration for saves made with the broken implementation.  Those
+	# modifiers have no stored mirror value, so their contribution cannot be
+	# separated safely from the real cap. Remove them now; the next monthly
+	# pulse will build the corrected mirror from a clean modifier graph.
+	if = {
+		limit = {
+			has_modifier = ffpa_double_innovation_cap
+			NOT = { has_variable = ffpa_innovation_cap_mirror_value }
+		}
+		remove_modifier = ffpa_double_innovation_cap
+	}
+	else = {
+		# Capture the unmodified cap while the modifier graph is still valid.
+		# If our previous mirror is active, subtract its stored contribution
+		# from the aggregate ordinary additive sources first.
+		set_variable = {
+			name = ffpa_innovation_cap_mirror_value
+			value = {
+				value = 50
+				add = {
+					value = literacy_rate
+					multiply = 150
+				}
+				add = {
+					value = modifier:country_weekly_innovation_max_add
+					if = {
+						limit = {
+							has_modifier = ffpa_double_innovation_cap
+							has_variable = ffpa_innovation_cap_mirror_value
+						}
+						subtract = var:ffpa_innovation_cap_mirror_value
+					}
+				}
+				min = 0
+			}
+		}
+
+		if = {
+			limit = { has_modifier = ffpa_double_innovation_cap }
+			remove_modifier = ffpa_double_innovation_cap
+		}
+
+		add_modifier = {
+			name = ffpa_double_innovation_cap
+			multiplier = var:ffpa_innovation_cap_mirror_value
+		}
+	}
+}

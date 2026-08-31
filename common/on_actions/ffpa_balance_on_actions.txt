@@ -1,0 +1,29 @@
+# Refresh immediately when a campaign is started for the first time.
+# Existing saves are repaired by the monthly country pulse below.
+on_game_started_after_lobby = {
+	on_actions = {
+		ffpa_initialize_innovation_cap
+	}
+}
+
+ffpa_initialize_innovation_cap = {
+	effect = {
+		every_country = {
+			ffpa_refresh_innovation_cap = yes
+		}
+	}
+}
+
+# Literacy, companies, principles and special buildings can change the cap.
+# Re-mirror it monthly so the final value remains twice the unmodified total.
+on_monthly_pulse_country = {
+	on_actions = {
+		ffpa_monthly_refresh_innovation_cap
+	}
+}
+
+ffpa_monthly_refresh_innovation_cap = {
+	effect = {
+		ffpa_refresh_innovation_cap = yes
+	}
+}

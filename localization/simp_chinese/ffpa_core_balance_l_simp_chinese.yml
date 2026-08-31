@@ -1,0 +1,11 @@
+﻿l_simp_chinese:
+ ffpa_postwar_population_recovery: "战后人口恢复"
+ ffpa_postwar_population_recovery_desc: "核战后的社会正在恢复。出生率、皈依和同化速度加成将在五十年内逐渐衰减。"
+ ffpa_double_innovation_cap: "创新力上限翻倍"
+ ffpa_double_innovation_cap_desc: "最大创新力投入提高至未应用此修正时的两倍。"
+ ffpa_double_technology_spread: "科技扩散翻倍"
+ ffpa_double_technology_spread_desc: "科技扩散速度提高100%。"
+ ffpa_union_war_annex_country_tenth: "统一战争吞并（10%恶名）"
+ FFPA_UNION_WAR_INFAMY_SCALE: "统一战争恶名：10%"
+ setting_uw_infamy_tenth: "#tooltippable #tooltip:[GetPlayer.GetTooltipTag],setting_uw_infamy_tenth_desc #high 十分之一恶名#!#!#!"
+ setting_uw_infamy_tenth_desc: "统一战争的初始吞并战争目标按正常吞并恶名的#v 10%#!计算。"

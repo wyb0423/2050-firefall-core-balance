@@ -1,0 +1,70 @@
+# 2050 Firefall Personal Adapter
+# Vanilla 1.13 grants 10 Trade Capacity per fully employed Trade Center level.
+# Injecting another 90 makes every level provide 100, regardless of the
+# selected Trade Quantity production method.
+
+INJECT:pm_trade_center = {
+	state_modifiers = {
+		workforce_scaled = {
+			state_trade_capacity_add = 90
+		}
+	}
+}
+
+# External Trade II replaces pm_trade_center, so it needs the same injection.
+INJECT:pm_trade_center_principle_external_trade_2 = {
+	state_modifiers = {
+		workforce_scaled = {
+			state_trade_capacity_add = 90
+		}
+	}
+}
+
+# Increase only merchant-marine consumption for every Trade Quantity PM.
+# Each injection adds four times the upstream value, making the merged total
+# exactly five times the original while leaving all other inputs unchanged.
+
+# Vanilla base: 3; merged total: 15.
+INJECT:pm_trade_center_trade_quantity_limited = {
+	building_modifiers = {
+		workforce_scaled = {
+			goods_input_merchant_marine_add = 12
+		}
+	}
+}
+
+# Vanilla base: 4; merged total: 20.
+INJECT:pm_trade_center_trade_quantity_normal = {
+	building_modifiers = {
+		workforce_scaled = {
+			goods_input_merchant_marine_add = 16
+		}
+	}
+}
+
+# Vanilla base: 5; merged total: 25.
+INJECT:pm_trade_center_trade_quantity_high = {
+	building_modifiers = {
+		workforce_scaled = {
+			goods_input_merchant_marine_add = 20
+		}
+	}
+}
+
+# Vanilla base: 6; merged total: 30.
+INJECT:pm_trade_center_trade_quantity_very_high = {
+	building_modifiers = {
+		workforce_scaled = {
+			goods_input_merchant_marine_add = 24
+		}
+	}
+}
+
+# Tech & Res base: 8; merged total: 40.
+INJECT:pm_trade_center_trade_quantity_ultra = {
+	building_modifiers = {
+		workforce_scaled = {
+			goods_input_merchant_marine_add = 32
+		}
+	}
+}

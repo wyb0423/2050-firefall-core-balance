@@ -1,0 +1,21 @@
+ffpa_postwar_population_recovery = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	state_birth_rate_mult = 1.0
+	state_conversion_mult = 0.5
+	state_assimilation_mult = 0.5
+}
+
+# Applied with a stored dynamic multiplier equal to the country's complete
+# unmodified maximum Innovation Investment. Adding that amount makes the final
+# cap exactly twice the original cap.
+ffpa_double_innovation_cap = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_weekly_innovation_max_add = 1
+}
+
+# A separate unscaled modifier is required: ffpa_double_innovation_cap is
+# applied with a dynamic multiplier and must not carry percentage effects.
+ffpa_double_technology_spread = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_tech_spread_mult = 1.0
+}

@@ -1,0 +1,7 @@
+# Favor contiguous automatic province growth after a colony is established.
+# These global province-picking rules affect both AI and player colonies.
+NDiplomacy = {
+	COLONY_PROVINCE_ADJACENCY_SCORE = 100
+	COLONY_PROVINCE_NO_ADJACENCY_MULT = 0.02
+	COLONY_PROVINCE_RANDOM_FACTOR = 1.05
+}

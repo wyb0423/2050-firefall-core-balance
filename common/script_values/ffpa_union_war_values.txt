@@ -1,0 +1,24 @@
+# Firefall's AI uses this value to decide whether a Union War would cross the
+# dangerous-infamy threshold. Preserve all upstream scales and add the adapter's
+# optional 10% scale.
+REPLACE:uw_estimated_union_war_infamy = {
+	value = uw_estimated_annex_infamy_base
+
+	if = {
+		limit = { has_game_rule = uw_infamy_none }
+		multiply = 0
+	}
+	else_if = {
+		limit = { has_game_rule = uw_infamy_tenth }
+		multiply = 0.10
+	}
+	else_if = {
+		limit = { has_game_rule = uw_infamy_quarter }
+		multiply = 0.25
+	}
+	else_if = {
+		limit = { has_game_rule = uw_infamy_half }
+		multiply = 0.5
+	}
+	# uw_infamy_full keeps multiply = 1
+}
