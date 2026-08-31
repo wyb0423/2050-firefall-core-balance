@@ -1,6 +1,6 @@
 # 2050 Firefall — Core Balance Adapter
 
-面向 `2050: The Fire Falls` 与 `[1.13] Tech & Res` 的个人核心平衡适配。该 Mod 从 `2050 Firefall — Personal Preferences Adapter` 中独立拆出，只拥有统一战争、殖民塑形和通用平衡三组功能。
+面向 `2050: The Fire Falls` 与 `[1.13] Tech & Res` 的个人核心平衡适配。该 Mod 从旧版 `2050 Firefall — Personal Preferences Adapter`（现 `FFPA — Firefall Flavor Pack`）中独立拆出，只拥有统一战争、殖民塑形和通用平衡三组功能。
 
 ## 依赖与加载顺序
 
@@ -16,9 +16,12 @@
 3. `Auto-Apply Automation PMs`
 4. `2050: The Fire Falls`
 5. `2050 Firefall — Core Balance Adapter`
-6. `2050 Firefall — Personal Preferences Adapter`
+6. `FFPA — Low-Workforce Building Pruning`
+7. `FFPA — Building Pruning: Tech & Res Compatibility`
+8. `FFPA — Tech & Res Auto PM Adapter`
+9. `FFPA — Firefall Flavor Pack`
 
-本 Mod 本身不依赖两个 Auto-Apply Mod 或 Personal Preferences Adapter。将本 Mod 放在 Firefall 与 Tech & Res 之后，是为了让覆盖和注入针对完整上游数据库生效。
+本 Mod 本身不依赖两个 Auto-Apply Mod 或 FFPA Firefall Flavor Pack。将本 Mod 放在 Firefall 与 Tech & Res 之后，是为了让覆盖和注入针对完整上游数据库生效。
 
 ## 统一战争 10% 恶名
 
@@ -47,7 +50,7 @@
 
 ## 存档兼容
 
-拆分没有改变任何游戏规则、事件、modifier、scripted effect 或持久变量 ID。旧存档若要维持拆分前的完整功能，需要同时启用本 Mod 与拆分后的 Personal Preferences Adapter。
+拆分没有改变任何游戏规则、事件、modifier、scripted effect 或持久变量 ID。旧存档若要维持拆分前的完整功能，需要同时启用本 Mod 与 `FFPA — Firefall Flavor Pack`。
 
 `ffpa_innovation_cap_mirror_value` 是持久存档接口。创新上限刷新会读取旧镜像值、移除旧 modifier、计算新镜像并重新添加动态 modifier；不得改成无状态的简单 remove/add。
 

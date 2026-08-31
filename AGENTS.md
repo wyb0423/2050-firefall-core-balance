@@ -71,7 +71,7 @@ AI 地区评分只控制殖民区域；`NDiplomacy` 只控制殖民地内部省�
 - TUR、GRE、BYZ 身份、日志、事件或地区建设；
 - Auto-Apply PMs 的设置变量和日志。
 
-不得调用 Personal Preferences Adapter 的 scripted effect、读取其临时变量或复制其定义。双方只分别向原版 on_action 数据库登记各自的模块包装入口。
+不得调用 FFPA Firefall Flavor Pack 的 scripted effect、读取其临时变量或复制其定义。双方只分别向原版 on_action 数据库登记各自的模块包装入口。
 
 ## 5. 覆盖与存档接口
 
