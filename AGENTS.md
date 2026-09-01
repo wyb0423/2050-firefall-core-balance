@@ -2,7 +2,7 @@
 
 ## 1. 适用范围
 
-本文件适用于本 Mod 根目录及全部子目录。本 Mod 是加载在 `[1.13] Tech & Res` 和 `2050: The Fire Falls` 之后的个人适配层，只拥有统一战争 10% 恶名、殖民塑形和通用平衡功能。
+本文件适用于本 Mod 根目录及全部子目录。本 Mod 是加载在 `[1.13] Tech & Res` 和 `2050: The Fire Falls` 之后的个人适配层，只拥有统一战争 10% 恶名、AI 宣称收复、殖民塑形和通用平衡功能。
 
 判断定义是否正确时，必须以“Victoria 3 原版 + Tech & Res + Firefall + 本 Mod”的实际加载顺序形成的最终数据库为准。
 
@@ -62,6 +62,18 @@ AI 地区评分只控制殖民区域；`NDiplomacy` 只控制殖民地内部省�
 
 贸易 PM 使用 `INJECT:`，只能增加指定字段，不复制完整 PM，也不接管自动 PM 选择逻辑。
 
+### 3.4 AI 宣称收复
+
+所有文件或定义：
+
+- `common/scripted_triggers/ffpa_ai_claim_triggers.txt`
+- `common/ai_strategies/zzzz_ffpa_claim_reclamation_strategy.txt`
+- 两份本地化中的 `ai_strategy_uw_reclaim_homelands_desc`
+
+`INJECT:ai_strategy_uw_reclaim_homelands` 完整接管 Firefall 战略的 `possible`、`weight`、`diplomatic_play_boldness`、`aggression`、`state_value`、`secret_goal_scores`、`wargoal_weights` 和 `wargoal_scores` 八个子表。Firefall 更新后必须逐段比较，其他顶层字段继续由上游拥有。
+
+实际宣称优先于无宣称文化故土，但普通征服不得被写成绝对禁令。分权国家持有的宣称不属于可执行收复目标。本模块不拥有全局战略刷新 define，不使用周期 on_action 或持久变量强制 `set_strategy`。
+
 ## 4. 外部边界
 
 本 Mod 不拥有：
@@ -83,6 +95,7 @@ AI 地区评分只控制殖民区域；`NDiplomacy` 只控制殖民地内部省�
 | `uw_estimated_union_war_infamy` | `REPLACE:` | Firefall |
 | `uw_start_union_war` | `REPLACE:` | Firefall |
 | `ai_strategy_default` | `INJECT:` | 原版、Tech & Res、Firefall |
+| `ai_strategy_uw_reclaim_homelands` | `INJECT:` | Firefall |
 | `NDiplomacy` | define 覆盖 | 原版及所有 define Mod |
 | `institution_*` | 同名顶层定义 | 原版、Firefall |
 | `pm_trade_center*` | `INJECT:` | 原版、Tech & Res、Firefall |
@@ -90,6 +103,9 @@ AI 地区评分只控制殖民区域；`NDiplomacy` 只控制殖民地内部省�
 以下 ID 是稳定接口，不因文件移动、排序或重构而改名：
 
 - `ffpa_innovation_cap_mirror_value`
+- `ffpa_has_unowned_claimed_state`
+- `ffpa_has_adjacent_unowned_claimed_state`
+- `ai_strategy_uw_reclaim_homelands`
 - 所有 `ffpa_*` modifier、effect、game rule、外交战和战争目标 ID
 - 统一战争的 Firefall 上游 ID
 
@@ -111,6 +127,7 @@ AI 地区评分只控制殖民区域；`NDiplomacy` 只控制殖民地内部省�
 - 殖民复核地区评分、内部省份形状以及玩家同受 define 影响。
 - 新游戏、旧存档和月度刷新分别验证人口恢复与创新镜像。
 - 贸易中心复核基础/External Trade II 容量以及五档船运投入。
+- AI 宣称收复复核战略资格与权重、目标国家欲望、`return_state`/`conquer_state` 选择、分权国家排除以及超级大国切换。
 
 运行时证据依次区分：文件加载、顶层解析、调度到达、trigger/effect 执行、最终状态未被后加载内容回写。
 

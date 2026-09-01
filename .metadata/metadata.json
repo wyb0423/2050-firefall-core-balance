@@ -1,7 +1,7 @@
 {
   "name": "2050 Firefall — Core Balance Adapter",
   "id": "com.wyb.2050-firefall-core-balance",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "supported_game_version": "1.13.*",
   "short_description": "Core balance, colonial shaping, and 10% Union War compatibility for Firefall and Tech & Res.",
   "tags": [

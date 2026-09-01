@@ -1,0 +1,252 @@
+# Firefall 0.1.1 compatibility: prefer actionable claims over unclaimed homelands.
+# Only the eight copied child maps below are replaced; all other strategy data remains upstream-owned.
+INJECT:ai_strategy_uw_reclaim_homelands = {
+	diplomatic_play_boldness = {
+		value = 50
+
+		# Confident against anyone holding our cultural homelands or claimed states.
+		if = {
+			limit = {
+				scope:target_country = {
+					any_scope_state = {
+						OR = {
+							is_homeland_of_country_cultures = root
+							has_claim_by = root
+						}
+					}
+				}
+			}
+			add = 50
+		}
+	}
+
+	aggression = {
+		value = 1
+
+		# Strong push to attack holders of primary-culture homelands or claimed states.
+		if = {
+			limit = {
+				NOT = { scope:target_country = { is_subject_of = root } }
+				scope:target_country = {
+					any_scope_state = {
+						OR = {
+							is_homeland_of_country_cultures = root
+							has_claim_by = root
+						}
+					}
+				}
+			}
+			add = 2
+
+			if = {
+				limit = {
+					has_strategic_adjacency = scope:target_country
+				}
+				add = 2
+			}
+
+			if = {
+				limit = {
+					scope:target_country.country_rank <= root.country_rank
+				}
+				add = 1
+			}
+		}
+
+		# Less aggressive against countries we're just antagonistic against, rather than belligerent/domineering
+		if = {
+			limit = {
+				has_attitude = {
+					who = scope:target_country
+					attitude = antagonistic
+				}
+			}
+			multiply = 0.25
+		}
+
+		# More aggressive against ideological enemies, a bit less aggressive against ideological allies
+		multiply = {
+			value = "ai_ideological_opinion(scope:target_country)"
+			multiply = -0.1
+			add = 1
+			max = 2.0
+			min = 0.5
+		}
+	}
+
+	wargoal_weights = {
+		annex_country = 1.25
+		conquer_state = 0.75
+		return_state = 3.0
+		force_nationalization = 0.25
+	}
+
+	# Retain Firefall homeland valuation while admitting claimed states.
+	state_value = {
+		if = {
+			limit = {
+				can_reach_target_state = yes
+				scope:target_state = {
+					OR = {
+						is_homeland_of_country_cultures = root
+						has_claim_by = root
+					}
+					NOT = { owner = root }
+					NOT = { owner = { is_subject_of = root } }
+				}
+			}
+			add = 50
+
+			if = {
+				limit = {
+					is_adjacent_to_state = scope:target_state
+				}
+				multiply = 2
+			}
+		}
+	}
+
+	wargoal_scores = {
+		return_state = {
+			if = {
+				limit = {
+					can_reach_target_state = yes
+					scope:target_state = {
+						has_claim_by = root
+					}
+				}
+				add = 500
+
+				if = {
+					limit = {
+						is_adjacent_to_state = scope:target_state
+					}
+					add = 250
+				}
+			}
+		}
+		conquer_state = {
+			if = {
+				limit = {
+					can_reach_target_state = yes
+					scope:target_state = {
+						is_homeland_of_country_cultures = root
+						NOT = { has_claim_by = root }
+						NOT = { owner = root }
+						NOT = { owner = { is_subject_of = root } }
+					}
+				}
+				add = 150
+
+				if = {
+					limit = {
+						is_adjacent_to_state = scope:target_state
+					}
+					add = 100
+				}
+			}
+
+			# Finish existing claims against this target before taking unrelated states.
+			if = {
+				limit = {
+					scope:target_country = {
+						any_scope_state = {
+							has_claim_by = root
+						}
+					}
+				}
+				add = -250
+			}
+		}
+	}
+
+	secret_goal_scores = {
+		conquer = {
+			trigger = {
+				NOT = { scope:target_country = { is_subject_of = root } }
+				can_reach_target_country = yes
+				scope:target_country = {
+					any_scope_state = {
+						OR = {
+							is_homeland_of_country_cultures = root
+							has_claim_by = root
+						}
+					}
+				}
+			}
+			score = {
+				value = 500
+
+				if = {
+					limit = {
+						has_strategic_adjacency = scope:target_country
+					}
+					add = 500
+				}
+
+				if = {
+					limit = {
+						scope:target_country.country_rank <= root.country_rank
+					}
+					add = 250
+				}
+			}
+		}
+	}
+
+	possible = {
+		is_subject = no
+		NOT = { is_country_type = decentralized }
+		OR = {
+			uw_has_unowned_primary_culture_homeland = yes
+			ffpa_has_unowned_claimed_state = yes
+		}
+	}
+
+	weight = {
+		value = 150
+
+		# Extra weight when a land neighbour holds our homeland (most actionable plays).
+		if = {
+			limit = {
+				uw_has_adjacent_unowned_primary_culture_homeland = yes
+			}
+			add = 150
+		}
+
+		if = {
+			limit = {
+				ffpa_has_adjacent_unowned_claimed_state = yes
+			}
+			add = 250
+		}
+
+		if = {
+			limit = {
+				country_fervor_primary_culture > 10
+			}
+			add = {
+				value = country_fervor_primary_culture
+				divide = 2
+			}
+		}
+
+		if = {
+			limit = { ig:ig_armed_forces ?= { is_powerful = yes } }
+			multiply = 1.5
+		}
+
+		if = {
+			limit = { has_radical_leftist_government = yes }
+			multiply = 0.5
+		}
+
+		# Apply after all ideology and interest-group multipliers so claims outrank superpower strategies.
+		if = {
+			limit = {
+				ffpa_has_unowned_claimed_state = yes
+			}
+			add = 11000
+		}
+	}
+}

@@ -1,0 +1,25 @@
+# Another non-decentralized country (not us / our subjects) holds one of our claims.
+ffpa_has_unowned_claimed_state = {
+	any_country = {
+		NOT = { this = root }
+		NOT = { is_subject_of = root }
+		NOT = { is_country_type = decentralized }
+		any_scope_state = {
+			has_claim_by = root
+		}
+	}
+}
+
+# A direct land neighbour held outside our subject hierarchy carries one of our claims.
+ffpa_has_adjacent_unowned_claimed_state = {
+	any_scope_state = {
+		any_neighbouring_state = {
+			has_claim_by = root
+			owner = {
+				NOT = { this = root }
+				NOT = { is_subject_of = root }
+				NOT = { is_country_type = decentralized }
+			}
+		}
+	}
+}

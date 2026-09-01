@@ -1,6 +1,6 @@
 # 2050 Firefall — Core Balance Adapter
 
-面向 `2050: The Fire Falls` 与 `[1.13] Tech & Res` 的个人核心平衡适配。该 Mod 从旧版 `2050 Firefall — Personal Preferences Adapter`（现 `FFPA — Firefall Flavor Pack`）中独立拆出，只拥有统一战争、殖民塑形和通用平衡三组功能。
+面向 `2050: The Fire Falls` 与 `[1.13] Tech & Res` 的个人核心平衡适配。该 Mod 从旧版 `2050 Firefall — Personal Preferences Adapter`（现 `FFPA — Firefall Flavor Pack`）中独立拆出，只拥有统一战争、AI 宣称收复、殖民塑形和通用平衡四组功能。
 
 ## 依赖与加载顺序
 
@@ -30,6 +30,14 @@
 - 把 10% 分支接入 Firefall 的 AI 恶名估值和四种统一战争开战流程。
 - 不修改 Firefall 原有的 0%、25%、50% 与 100% 分支。
 
+## AI 宣称收复
+
+- Firefall 的“收复故土”外交战略同时面向实际宣称与主流文化故土，并优先处理实际宣称。
+- 境外实际宣称使该战略压过 Tech & Res 的超级大国霸权战略；只有境外文化故土时仅提高普通出现权重。
+- `return_state` 获得强软偏好；`conquer_state` 仍可用于无宣称文化故土和其他高价值目标。
+- 分权国家持有的宣称州不触发实际宣称战略加成。
+- 不修改全局战略刷新 define，也不使用周期 on_action 强制切换战略。
+
 ## 殖民塑形
 
 - AI 优先首都区域、正在发展的殖民地和已有本国或附属国存在的区域。
@@ -54,6 +62,8 @@
 
 `ffpa_innovation_cap_mirror_value` 是持久存档接口。创新上限刷新会读取旧镜像值、移除旧 modifier、计算新镜像并重新添加动态 modifier；不得改成无状态的简单 remove/add。
 
+AI 宣称收复不新增持久变量。新游戏在初始外交战略选择时使用新权重；旧存档在下一次原生外交战略重抽后生效。
+
 ## 覆盖风险
 
 以下对象针对最终加载数据库工作，更新原版或上游 Mod 后需要重新比较：
@@ -62,6 +72,8 @@
 - `REPLACE:uw_estimated_union_war_infamy`
 - `REPLACE:uw_start_union_war`
 - `INJECT:ai_strategy_default`
+- `INJECT:ai_strategy_uw_reclaim_homelands` 的八个子表
+- Firefall 的 `uw_has_unowned_primary_culture_homeland` 与 `uw_has_adjacent_unowned_primary_culture_homeland`
 - `NDiplomacy`
 - 七个 `institution_*` 顶层定义
 - 七个贸易中心 PM 注入

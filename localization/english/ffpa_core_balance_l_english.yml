@@ -5,6 +5,7 @@
  ffpa_double_innovation_cap_desc: "Maximum Innovation Investment is doubled relative to its value without this modifier."
  ffpa_double_technology_spread: "Doubled Technology Spread"
  ffpa_double_technology_spread_desc: "Technology Spread speed is increased by 100%."
+ ai_strategy_uw_reclaim_homelands_desc: "[COUNTRY.GetName] prioritizes restoring states it already claims, while also seeking to bring the [concept_homeland|l]s of its [concept_primary_culture|l]s under its control; it may readily open [concept_diplomatic_play|l]s for either aim."
  ffpa_union_war_annex_country_tenth: "Union War Annexation (10% Infamy)"
  FFPA_UNION_WAR_INFAMY_SCALE: "Union War Infamy: 10%"
  setting_uw_infamy_tenth: "#tooltippable #tooltip:[GetPlayer.GetTooltipTag],setting_uw_infamy_tenth_desc #high Tenth Infamy#!#!#!"
