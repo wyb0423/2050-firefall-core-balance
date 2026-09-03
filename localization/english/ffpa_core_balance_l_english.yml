@@ -8,5 +8,7 @@
  ai_strategy_uw_reclaim_homelands_desc: "[COUNTRY.GetName] prioritizes restoring states it already claims, while also seeking to bring the [concept_homeland|l]s of its [concept_primary_culture|l]s under its control; it may readily open [concept_diplomatic_play|l]s for either aim."
  ffpa_union_war_annex_country_tenth: "Union War Annexation (10% Infamy)"
  FFPA_UNION_WAR_INFAMY_SCALE: "Union War Infamy: 10%"
+ FFPA_CONQUER_STATE_INFAMY_SCALE: "Conquer State Infamy: 85%"
+ FFPA_RETURN_STATE_INFAMY_SCALE: "Return State Infamy: 70%"
  setting_uw_infamy_tenth: "#tooltippable #tooltip:[GetPlayer.GetTooltipTag],setting_uw_infamy_tenth_desc #high Tenth Infamy#!#!#!"
  setting_uw_infamy_tenth_desc: "Starting Union War annexation war goals cost #v 10%#! of normal annexation Infamy."

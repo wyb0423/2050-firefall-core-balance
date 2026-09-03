@@ -8,5 +8,7 @@
  ai_strategy_uw_reclaim_homelands_desc: "[COUNTRY.GetName]优先收复本国已有宣称的地区，同时也力图将本国所有[concept_primary_culture|e]的[concept_homeland|e]收归治下；可能为任一目标积极发起[concept_diplomatic_play|e]。"
  ffpa_union_war_annex_country_tenth: "统一战争吞并（10%恶名）"
  FFPA_UNION_WAR_INFAMY_SCALE: "统一战争恶名：10%"
+ FFPA_CONQUER_STATE_INFAMY_SCALE: "征服地区恶名：85%"
+ FFPA_RETURN_STATE_INFAMY_SCALE: "归还地区恶名：70%"
  setting_uw_infamy_tenth: "#tooltippable #tooltip:[GetPlayer.GetTooltipTag],setting_uw_infamy_tenth_desc #high 十分之一恶名#!#!#!"
  setting_uw_infamy_tenth_desc: "统一战争的初始吞并战争目标按正常吞并恶名的#v 10%#!计算。"
