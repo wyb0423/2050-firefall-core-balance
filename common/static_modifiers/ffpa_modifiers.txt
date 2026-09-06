@@ -1,6 +1,6 @@
 ffpa_postwar_population_recovery = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
-	state_birth_rate_mult = 1.0
+	state_birth_rate_mult = 0.5
 	state_conversion_mult = 0.5
 	state_assimilation_mult = 0.5
 }
