@@ -1,6 +1,6 @@
 # 2050 Firefall — Core Balance Adapter
 
-面向 `2050: The Fire Falls` 与 `[1.13] Tech & Res` 的个人核心平衡适配。该 Mod 从旧版 `2050 Firefall — Personal Preferences Adapter`（现 `FFPA — Firefall Flavor Pack`）中独立拆出，只拥有统一战争、AI 宣称收复、殖民塑形和通用平衡四组功能。
+面向 `2050: The Fire Falls` 与 `[1.13] Tech & Res` 的个人核心平衡适配。该 Mod 从旧版 `2050 Firefall — Personal Preferences Adapter`（现 `FFPA — Firefall Flavor Pack`）中独立拆出，只拥有统一战争、AI 宣称收复、AI 经济发展、殖民塑形和通用平衡五组功能。
 
 ## 依赖与加载顺序
 
@@ -38,6 +38,16 @@
 - 分权国家持有的宣称州不触发实际宣称战略加成。
 - 不修改全局战略刷新 define，也不使用周期 on_action 强制切换战略。
 
+## AI 经济发展
+
+- 资源与工业战略采用统一的识字率系数（0.75–1.25），基础权重分别为30和40；强势实业家只给工业战略额外10%权重。移除这两个战略原有的国家、地区、年代偏好，保留上游法律准入。
+- 资源战略的资源建筑权重提高10%；工业战略的制造业权重提高20%，配套资源建筑权重提高10%。保留上游商品、补贴和盈利评分。
+- 建造目标沿用原版收入、人口、法律与外交支出公式，将投资池周收入扣除额从7500降到2500，移除国家等级及历史日志专属加成；投资池积压的建造支出系数从0.75提高到0.85。原生债务停建与恢复门槛不变。
+- PM评估时考虑切换的概率从0.1提高到0.2；更高产出候选的惯性系数从0.95提高到1.0，等量或较低产出候选从0.75提高到0.8。后者包含部分自动化方式，也包含降级；盈利、就业和投入品惩罚仍由原生评分决定，不保证采用最新方式。
+- 补齐上游调用但约定加载栈缺失的 `kai_has_high_supply`，无需额外安装 Kuromi AI。
+
+不新增周期扫描、强制战略、PM接管或持久变量。旧档随下一次原生策略重评及建筑评估生效；Auto-Apply 模块随后可能影响最终 PM，需实机观察。此调整缩小决策规则差距，不消除人口、资源、技术或财政带来的实际发展差异。
+
 ## 殖民塑形
 
 - AI 优先首都区域、正在发展的殖民地和已有本国或附属国存在的区域。
@@ -74,6 +84,8 @@ AI 宣称收复不新增持久变量。新游戏在初始外交战略选择时�
 - `INJECT:ai_strategy_default`
 - `INJECT:ai_strategy_uw_reclaim_homelands` 的八个子表
 - Firefall 的 `uw_has_unowned_primary_culture_homeland` 与 `uw_has_adjacent_unowned_primary_culture_homeland`
+- 资源/工业战略的 `weight`、`building_group_weights` 与默认战略的 `wanted_construction_output`
+- `kai_has_high_supply` 与四项 `NAI` 经济/PM define
 - `NDiplomacy`
 - 七个 `institution_*` 顶层定义
 - 七个贸易中心 PM 注入

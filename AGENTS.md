@@ -2,7 +2,7 @@
 
 ## 1. 适用范围
 
-本文件适用于本 Mod 根目录及全部子目录。本 Mod 是加载在 `[1.13] Tech & Res` 和 `2050: The Fire Falls` 之后的个人适配层，只拥有统一战争 10% 恶名、AI 宣称收复、殖民塑形和通用平衡功能。
+本文件适用于本 Mod 根目录及全部子目录。本 Mod 是加载在 `[1.13] Tech & Res` 和 `2050: The Fire Falls` 之后的个人适配层，只拥有统一战争 10% 恶名、AI 宣称收复、AI 经济发展、殖民塑形和通用平衡功能。
 
 判断定义是否正确时，必须以“Victoria 3 原版 + Tech & Res + Firefall + 本 Mod”的实际加载顺序形成的最终数据库为准。
 
@@ -73,6 +73,14 @@ AI 地区评分只控制殖民区域；`NDiplomacy` 只控制殖民地内部省�
 `INJECT:ai_strategy_uw_reclaim_homelands` 完整接管 Firefall 战略的 `possible`、`weight`、`diplomatic_play_boldness`、`aggression`、`state_value`、`secret_goal_scores`、`wargoal_weights` 和 `wargoal_scores` 八个子表。Firefall 更新后必须逐段比较，其他顶层字段继续由上游拥有。
 
 实际宣称优先于无宣称文化故土，但普通征服不得被写成绝对禁令。分权国家持有的宣称不属于可执行收复目标。本模块不拥有全局战略刷新 define，不使用周期 on_action 或持久变量强制 `set_strategy`。
+
+### 3.5 AI 经济发展
+
+- `common/ai_strategies/zzzz_ffpa_ai_development.txt` 仅接管资源/工业战略的 `weight`、`building_group_weights` 及默认战略的 `wanted_construction_output`。
+- `common/scripted_triggers/ffpa_ai_supply_triggers.txt` 补齐上游稳定调用名 `kai_has_high_supply`；它是有意保留的非 ffpa 前缀兼容入口，不引入 Kuromi 依赖。
+- `common/defines/zzzz_ffpa_ai_development_defines.txt` 拥有四项原生经济/PM参数；不改变债务停建门槛、原生盈利/短缺评分或全局战略刷新。
+- 更新上游时复核上述完整子表、供应 trigger 的原生市场商品 scope 和 define；不得扩展成世界扫描、强制切换战略或 PM 状态机。
+- 运行 `python3 scripts/check_ai_development.py --game-root GAME --techres-root TECHRES --firefall-root FIREFALL`。静态场景不能证明原生评分、Auto-Apply 后写和实际发展结果。
 
 ## 4. 外部边界
 

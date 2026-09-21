@@ -1,0 +1,13 @@
+# Compatibility entry point called by Tech & Res / Firefall's AI strategies.
+# The approved stack does not include Kuromi AI, which originally supplied it.
+# Country scope -> market -> market good. Keep the upstream parameter contract.
+kai_has_high_supply = {
+	market = {
+		mg:$GOODS$ = {
+			market_goods_cheaper > {
+				value = 1
+				subtract = define:NAI|PRODUCTION_BUILDING_OUTPUT_HIGH_PRICE_THRESHOLD
+			}
+		}
+	}
+}

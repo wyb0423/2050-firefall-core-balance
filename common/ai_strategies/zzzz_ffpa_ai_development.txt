@@ -1,0 +1,106 @@
+# Native economic evaluation remains authoritative. Only the named child tables
+# are replaced; upstream laws, goods stances, subsidies and diplomacy survive.
+INJECT:ai_strategy_resource_expansion = {
+	weight = {
+		value = 30
+		multiply = {
+			value = literacy_rate
+			multiply = 0.5
+			add = 0.75
+			min = 0.75
+			max = 1.25
+		}
+	}
+	building_group_weights = {
+		bg_rubber = 1.65
+		bg_oil_extraction = 1.65
+		bg_mining = 1.65
+		bg_logging = 1.65
+	}
+}
+
+INJECT:ai_strategy_industrial_expansion = {
+	weight = {
+		value = 40
+		multiply = {
+			value = literacy_rate
+			multiply = 0.5
+			add = 0.75
+			min = 0.75
+			max = 1.25
+		}
+		if = {
+			limit = {
+				exists = ig:ig_industrialists
+				ig:ig_industrialists = { is_powerful = yes }
+			}
+			multiply = 1.1
+		}
+	}
+	building_group_weights = {
+		bg_manufacturing = 1.5
+		bg_rubber = 1.375
+		bg_oil_extraction = 1.375
+		bg_mining = 1.375
+		bg_logging = 1.375
+	}
+}
+
+INJECT:ai_strategy_default = {
+	# Vanilla 1.13 formula, with a smaller investment-income deduction and no
+	# rank / historical-journal / country-specific strategy multipliers.
+	# A target is not a spending order: native debt and budget checks still apply.
+	wanted_construction_output = {
+		if = {
+			limit = {
+				OR = {
+					has_game_rule = free_construction_unscaled
+					AND = {
+						is_ai = no
+						has_game_rule = free_construction_scaled_player_exemption
+					}
+				}
+			}
+			add = 10
+		}
+		else = {
+			add = {
+				value = 2
+				add = { value = gdp divide = 2000000 multiply = 8 }
+				max = 10
+			}
+		}
+		add = {
+			value = investment_pool_income
+			subtract = 2500
+			divide = 750
+			min = 0
+		}
+		add = {
+			value = fixed_income
+			divide = 5000
+			min = 0
+			max = 200
+		}
+		add = { value = total_population divide = 2000000 max = 100 }
+		if = {
+			limit = { total_population >= 2000000 }
+			add = 10
+		}
+		if = {
+			limit = {
+				OR = {
+					has_strategy = ai_strategy_resource_expansion
+					has_strategy = ai_strategy_industrial_expansion
+				}
+			}
+			multiply = 1.25
+		}
+		if = {
+			limit = { has_law_or_variant = law_type:law_traditionalism }
+			multiply = 0.5
+		}
+		multiply = { value = 1 subtract = diplomatic_pact_expense_ratio }
+		min = 2
+	}
+}

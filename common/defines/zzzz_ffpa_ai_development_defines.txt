@@ -1,0 +1,8 @@
+NAI = {
+	MONEY_SPENDING_CONSTRUCTION_TOO_LARGE_INVESTMENT_POOL_FACTOR = 0.85
+	PRODUCTION_METHOD_CHANCE_TO_CHANGE = 0.2
+	PRODUCTION_METHOD_STICKINESS_UPGRADE = 1.0
+	# Equal-output automation uses this branch too. Retain a 20% switching
+	# penalty while allowing profitable labor-saving alternatives more often.
+	PRODUCTION_METHOD_STICKINESS_DOWNGRADE = 0.8
+}
