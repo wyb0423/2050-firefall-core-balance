@@ -1,0 +1,11 @@
+﻿POPS = {
+	s:STATE_ALASKA = {
+		region_state:WAK = {
+			# Rehome WAK's former Yukon population in its Anchorage enclave.
+			create_pop = {
+				culture = anglo_canadian
+				size = 1324017
+			}
+		}
+	}
+}

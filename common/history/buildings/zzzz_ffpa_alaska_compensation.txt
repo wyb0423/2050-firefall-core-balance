@@ -1,0 +1,38 @@
+﻿BUILDINGS = {
+	s:STATE_ALASKA = {
+		region_state:WAK = {
+			# Final combined Alaska and Yukon levels; later history entries replace rather than add.
+			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:WAK"
+						levels = 7
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_vertical_filing_cabinets" }
+			}
+			create_building = {
+				building = "building_paper_mill"
+				add_ownership = {
+					country = {
+						country = "c:WAK"
+						levels = 10
+					}
+				}
+				reserves = 1
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					country = {
+						country = "c:WAK"
+						levels = 2
+					}
+				}
+				reserves = 1
+			}
+		}
+	}
+}
